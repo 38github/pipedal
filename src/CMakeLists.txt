@@ -101,7 +101,7 @@ set (USE_SANITIZE False)
 if (!ENABLE_VST3)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-psabi")
 else()
-    set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-multichar -Wno-psabi")
+    set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-multichar -Wno-psabi -Oz -flto=1 -ftree-parallelize-loops=4 -floop-parallelize-all -fopenmp")
 endif()
 
 
@@ -110,14 +110,14 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 
     set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O0 -DDEBUG" )
     if (USE_SANITIZE) 
-        set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fsanitize=address -static-libasan " )
+        set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fsanitize=address -static-libasan -Oz -flto=1 -ftree-parallelize-loops=4 -floop-parallelize-all -fopenmp" )
     endif()
 elseif(CMAKE_BUILD_TYPE MATCHES RelWithDebInfo)
     message(STATUS "RelWithgDebInfo build")
-    #set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "" )
+    #set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-Oz -flto=1 -ftree-parallelize-loops=4 -floop-parallelize-all -fopenmp" )
 else()
     message(STATUS "Release build")
-    #set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "" )
+    #set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-Oz -flto=1 -ftree-parallelize-loops=4 -floop-parallelize-all -fopenmp" )
 endif()
 
 
