@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.19.0)
 project(piddletest VERSION 0.1.0)
 
-
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set (CMAKE_CXX_FLAGS "-Wno-psabi -fsanitize=address -static-libasan")
+set (CMAKE_CXX_FLAGS "-Wno-psabi -fsanitize=address -static-libasan -flto=1 -ftree-parallelize-loops=4 -floop-parallelize-all -fopenmp")
+set (CMAKE_C_FLAGS "-Wno-psabi -fsanitize=address -static-libasan -flto=1 -ftree-parallelize-loops=4 -floop-parallelize-all -fopenmp")
+
 
 SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 
